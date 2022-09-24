@@ -1,0 +1,54 @@
+<page-header-contacts
+  title="contacts"
+  subtitle="this is the Contact page"
+  icon="fas fa-users"
+>
+</page-header-contacts>
+
+<div *ngIf="dataReceived; else loader">
+  <div class="d-flex justify-content-between">
+    <div class="my-2">
+      <a
+        routerLink="new-contact"
+        class="btn btn-outline-dark"
+        title="Add new Contact"
+        ><i class="fa fa-plus-circle"></i> {{ "add contact" | titlecase }}</a
+      >
+    </div>
+
+    <display-mode-controllers
+      [controllers]="controllers"
+      (onChangeDisplay)="onChangeDisplay($event)"
+    ></display-mode-controllers>
+  </div>
+
+  <search-bar
+    *ngIf="contacts && contacts.length"
+    [categories]="categories"
+    [array]="contactsRowData"
+    (onArrayFiltered)="onSearch($event)"
+  ></search-bar>
+
+  <div *ngIf="contacts && contacts.length; else noContacts">
+    <contacts-table
+      *ngIf="display === 'table'"
+      [contacts]="contacts"
+      (onDeleteContact)="deleteContact($event)"
+    ></contacts-table>
+
+    <contacts-folders
+      [contact]="contacts"
+      *ngIf="display === 'folder'"
+    ></contacts-folders>
+  </div>
+
+  <ng-template #noContacts>
+    <div class="p-2">
+      {{ "no contacts where found in the database" | textCapital }}
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #loader>
+  <spinner-loader></spinner-loader>
+</ng-template>

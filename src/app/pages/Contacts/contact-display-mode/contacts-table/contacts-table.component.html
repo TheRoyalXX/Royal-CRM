@@ -1,0 +1,44 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th>{{ "Num." | titlecase }}</th>
+        <th>{{ "Name" | titlecase }}</th>
+        <th>{{ "Surname" | titlecase }}</th>
+        <th class="d-none d-md-table-cell">{{ "Phone" | titlecase }}</th>
+        <th class="d-none d-md-table-cell">{{ "Email" | titlecase }}</th>
+        <th>{{ "Edit" | titlecase }}</th>
+        <th>{{ "Delete" | titlecase }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        [ngClass]="odd ? 'alert-primary' : 'bg-light'"
+        *ngFor="let contact of contacts; index as i; odd as odd"
+        [routerLink]="['contact-details', contact._id]"
+        role="button"
+      >
+        <td>{{ i + 1 }}</td>
+        <td>{{ contact.firstName | textCapital }}</td>
+        <td>{{ contact.lastName | textCapital }}</td>
+        <td class="d-none d-md-table-cell">{{ contact.phone }}</td>
+        <td class="d-none d-md-table-cell">{{ contact.email }}</td>
+        <td>
+          <a
+            class="btn btn-outline-dark"
+            [routerLink]="['edit-contact', contact._id]"
+            role="button"
+            ><i class="fas fa-pen"></i
+          ></a>
+        </td>
+        <td>
+          <button
+            class="btn btn-outline-dark"
+            (click)="deleteCustomer($event, contact._id!)"
+          >
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

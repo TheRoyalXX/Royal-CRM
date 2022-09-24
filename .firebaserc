@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "royal-crm-itay-reizel": {
+      "hosting": {
+        "Royal-crm": [
+          "royal-crm-itay-reizel"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "royal-crm-itay-reizel"
+  }
+}

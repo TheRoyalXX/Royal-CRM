@@ -1,0 +1,23 @@
+<page-header-contacts
+  title="Edit contacts"
+  subtitle="Here you can edit your contacts details"
+  icon="fas fa-user-edit"
+></page-header-contacts>
+
+<div *ngIf="dataReceived; else loader">
+  <contact-form
+    *ngIf="contact; else nocontacts"
+    [contact]="contact"
+    (reset)="resetForm()"
+    (submit)="onSubmit($event)"
+  ></contact-form>
+
+  <ng-template #nocontacts>{{
+    "Oops it looks like there is no contacts with this ID in the database"
+      | textCapital
+  }}</ng-template>
+</div>
+
+<ng-template #loader>
+  <spinner-loader></spinner-loader>
+</ng-template>
